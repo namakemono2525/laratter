@@ -30,6 +30,21 @@
               </form>
               @endif
             </div>
+
+            <div class="flex">
+              @if ($tweet->savedByUsers->contains(auth()->id()))
+              <form action="{{ route('tweets.unsave', $tweet) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="text-red-500 hover:text-red-700">Unsave</button>
+              </form>
+              @else
+              <form action="{{ route('tweets.save', $tweet) }}" method="POST">
+                @csrf
+                <button type="submit" class="text-blue-500 hover:text-blue-700">Save</button>
+              </form>
+              @endif
+            </div>
           </div>
           @endforeach
         </div>

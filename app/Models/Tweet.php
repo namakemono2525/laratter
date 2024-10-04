@@ -24,4 +24,9 @@ class Tweet extends Model
     {
      return $this->hasMany(Comment::class)->orderBy('created_at', 'desc');
     }
+
+     public function savedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'saved_tweet_user')->withTimestamps();
+    }
 }
