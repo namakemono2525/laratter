@@ -6,6 +6,9 @@ use App\Http\Controllers\TweetController;
 use App\Http\Controllers\TweetLikeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\TweetSaveController;
+use App\Http\Controllers\UserSavedTweetsController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,6 +30,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/follow/{user}', [FollowController::class, 'store'])->name('follow.store');
     Route::delete('/follow/{user}', [FollowController::class, 'destroy'])->name('follow.destroy');
     Route::resource('tweets.comments', CommentController::class);
+    Route::post('/tweets/{tweet}/save', [TweetSaveController::class, 'store'])->name('tweets.save');
+    Route::delete('/tweets/{tweet}/save', [TweetSaveController::class, 'destroy'])->name('tweets.unsave');
+    Route::get('/saved-tweets', [UserSavedTweetsController::class, 'index'])->middleware('auth')->name('saved.tweets');
 });
 
 require __DIR__.'/auth.php';

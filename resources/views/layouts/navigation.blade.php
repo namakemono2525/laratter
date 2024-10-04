@@ -27,6 +27,9 @@
                     <x-nav-link :href="route('profile.show', auth()->user())" :active="request()->routeIs('profile.show')">
                         {{ __('マイページ') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('saved.tweets')" :active="request()->routeIs('saved.tweets')">
+                        {{ __('保存されたツイート') }}
+                    </x-nav-link>
                 </div>
             </div>
 
